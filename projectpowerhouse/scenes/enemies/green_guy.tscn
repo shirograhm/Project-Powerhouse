@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://clucb4erf6hfw"]
+
+[ext_resource type="PackedScene" uid="uid://hv0evwawh25x" path="res://scenes/enemies/enemy_base.tscn" id="1_luw67"]
+[ext_resource type="Texture2D" uid="uid://cqqe3n4rptlo4" path="res://texures/green_guy.png" id="2_grmg1"]
+[ext_resource type="PackedScene" uid="uid://d4mu353dd8rwh" path="res://scenes/enemies/behaviors/follow_behavior.tscn" id="2_k1kjx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or221"]
+atlas = ExtResource("2_grmg1")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fog3l"]
+atlas = ExtResource("2_grmg1")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj8kv"]
+atlas = ExtResource("2_grmg1")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbmro"]
+atlas = ExtResource("2_grmg1")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykebl"]
+atlas = ExtResource("2_grmg1")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7yv1w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or221")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fog3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj8kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbmro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykebl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6be5"]
+radius = 8.3
+height = 35.75
+
+[node name="green_guy" instance=ExtResource("1_luw67")]
+move_speed = 20.0
+
+[node name="FollowBehavior" parent="." index="0" instance=ExtResource("2_k1kjx")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_7yv1w")
+autoplay = "default"
+frame_progress = 0.0377161
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+rotation = 0.933751
+shape = SubResource("CapsuleShape2D_t6be5")

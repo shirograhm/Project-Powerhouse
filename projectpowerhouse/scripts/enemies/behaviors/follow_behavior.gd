@@ -6,7 +6,8 @@ extends Node
 
 func _ready() -> void:
 	if (parent == null):
-		printerr("No parent for " + name + ". Please assign it")
+		#print("No parent for " + name + ". Please assign it")
+		parent = get_parent() as enemy_base;
 
 func _physics_process(delta: float) -> void:
 	if (USE_DEBUG_MOVEMENT):
