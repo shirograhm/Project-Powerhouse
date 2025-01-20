@@ -11,4 +11,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$HealthPanel/Label.text = "Health: " + str(player_node.health)
+	update_HUD_values()
+
+func update_HUD_values() -> void:
+	$'HUDPanel/HealthBar/HealthLabel'.text = "[center]" + str(player_node.health) + " out of " + str(player_node.max_health)
+	$HUDPanel/HealthBar.min_value = 0
+	$HUDPanel/HealthBar.max_value = player_node.max_health
+	$HUDPanel/HealthBar.value = player_node.health
+	# TODO: Once we have a wave timer, we can do this
+	# $HUDPanel/WaveBar.min_value = 0
+	# $HUDPanel/WaveBar.max_value = GLOBAL_VAR.WAVE_DURATION
+	# $HUDPanel/WaveBar.value = GLOBAL_VAR.WAVE_DURATION - game_scene.wave_timer.time_left
+	# TODO: Once we have a wave counter, we can do this
+	# $HUDPanel/WaveLabel.text = "Wave " + str(game_scene.current_wave)
