@@ -38,6 +38,14 @@ func shoot():
 		goldfish_projectile.direction = global_position.direction_to(target)
 		goldfish_projectile.look_at(target)
 
+func die():
+	queue_free()
+
+func take_damage(amount: float):
+	health -= amount
+	if (health <= 0):
+		die()
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		if attack_timer > 0:
