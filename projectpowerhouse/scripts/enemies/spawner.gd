@@ -37,10 +37,8 @@ func spawn():
 		if (spawnables[i].wave_number <= wave_number):
 			weight = spawnables[i].spawn_chance;
 		weights.append(weight)
-		
-#	TODO: Move to global.gd
-	var rng := RandomNumberGenerator.new()
-	var index = rng.rand_weighted(weights)
+	
+	var index = Global.rng.rand_weighted(weights)
 	
 	var instance = spawnables[index].spawn_scene.instantiate() as enemy_base;
 	var ratio = randf() * total_size
