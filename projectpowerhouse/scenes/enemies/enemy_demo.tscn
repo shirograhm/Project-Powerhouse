@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://banm5oq63ip52"]
+
+[ext_resource type="PackedScene" uid="uid://hv0evwawh25x" path="res://scenes/enemies/enemy_base.tscn" id="1_r256y"]
+[ext_resource type="Texture2D" uid="uid://bnaxccbfj8ein" path="res://texures/Virus.png" id="2_oxy7a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cdo2"]
+
+[node name="EnemyDemo" instance=ExtResource("1_r256y")]
+health = 10
+move_speed = 2
+USE_DEBUG_MOVEMENT = true
+
+[node name="Virus" type="Sprite2D" parent="." index="0"]
+position = Vector2(0.375, 1.475)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_oxy7a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_6cdo2")
