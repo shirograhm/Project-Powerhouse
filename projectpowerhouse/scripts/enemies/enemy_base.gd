@@ -58,7 +58,7 @@ func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, l
 func perform_attack():
 	on_attack.emit()
 	print(name + " attacked player")
-	pass
+	player_node.take_damage(damage)
 
 #################### PUBLIC FUNKIES ####################
 func take_damage(amount: float) -> void:
