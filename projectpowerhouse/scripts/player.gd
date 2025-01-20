@@ -7,10 +7,12 @@ class_name player extends CharacterBody2D
 
 var target:Vector2
 var attack_timer:float
+var health:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	attack_timer = 0
+	health = max_health
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
