@@ -7,6 +7,7 @@ class_name goldfish extends Area2D
 
 
 
+
 var life_timer:float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,8 +22,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func _physics_process(delta: float) -> void:
-	if direction:
-		position += direction * speed  * delta
+	position += direction.normalized() * speed  * delta
 
 
 

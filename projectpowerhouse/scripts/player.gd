@@ -1,12 +1,9 @@
 class_name player extends CharacterBody2D
 
-
-
 @export var speed := 200.0
 @export var max_health := 50.0
 @export var attack_delay := 0.8
-
-
+@export var Projectile:PackedScene
 
 var target:Vector2
 var attack_timer:float
@@ -30,7 +27,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func shoot():
-	print("todo shoot")
+	var projectile = Projectile.instantiate()
+	owner.add_child(projectile)
+	projectile.transform = transform
+	
+	if projectile is goldfish:
+		var goldfish_projectile = projectile as goldfish
+		goldfish_projectile.direction = global_position.direction_to(target)
+		goldfish_projectile.look_at(target)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
@@ -38,3 +42,4 @@ func _input(event: InputEvent) -> void:
 			return
 		target = get_global_mouse_position()
 		attack_timer = attack_delay
+		shoot()
