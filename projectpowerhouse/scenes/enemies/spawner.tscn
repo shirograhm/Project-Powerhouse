@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://sovlqsvea7pm"]
+[gd_scene load_steps=7 format=3 uid="uid://sovlqsvea7pm"]
 
 [ext_resource type="Script" path="res://scripts/enemies/spawner.gd" id="1_a3opm"]
+[ext_resource type="PackedScene" uid="uid://banm5oq63ip52" path="res://scenes/enemies/enemy_demo.tscn" id="2_a1l5d"]
+[ext_resource type="Script" path="res://resources/enemies/enemy_spawn_res.gd" id="2_wnv8m"]
+[ext_resource type="PackedScene" uid="uid://clucb4erf6hfw" path="res://scenes/enemies/green_guy.tscn" id="4_w4yxr"]
+
+[sub_resource type="Resource" id="Resource_8qy8c"]
+script = ExtResource("2_wnv8m")
+wave_number = 0
+spawn_chance = 1.0
+spawn_scene = ExtResource("2_a1l5d")
+
+[sub_resource type="Resource" id="Resource_le3j6"]
+script = ExtResource("2_wnv8m")
+wave_number = 0
+spawn_chance = 1.0
+spawn_scene = ExtResource("4_w4yxr")
 
 [node name="Spawner" type="Path2D"]
 script = ExtResource("1_a3opm")
+spawnables = Array[ExtResource("2_wnv8m")]([SubResource("Resource_8qy8c"), SubResource("Resource_le3j6")])
