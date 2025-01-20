@@ -3,18 +3,15 @@ extends Node
 @export var player_path:NodePath
 
 var player_node: player
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	player_node = get_node(player_path) as player
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_HUD_values()
 
 func update_HUD_values() -> void:
-	$'HUDPanel/HealthBar/HealthLabel'.text = "[center]" + str(player_node.health) + " out of " + str(player_node.max_health)
+	$'HUDPanel/HealthBar/HealthLabela'.text = "[center]" + str(player_node.health) + " out of " + str(player_node.max_health)
 	$HUDPanel/HealthBar.min_value = 0
 	$HUDPanel/HealthBar.max_value = player_node.max_health
 	$HUDPanel/HealthBar.value = player_node.health
