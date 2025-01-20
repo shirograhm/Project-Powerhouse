@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://7rbt8oegjtj3"]
+
+[ext_resource type="Texture2D" uid="uid://cnrqn0s0juwkb" path="res://texures/goldfish.png" id="1_4f3af"]
+[ext_resource type="Script" path="res://scripts/goldfish.gd" id="1_sgfff"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7fopc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bba80"]
+atlas = ExtResource("1_4f3af")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf7ks"]
+atlas = ExtResource("1_4f3af")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byfm4"]
+atlas = ExtResource("1_4f3af")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wcjk5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bba80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uf7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byfm4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Goldfish" type="Node2D"]
+
+[node name="GoldfishController" type="Area2D" parent="."]
+position = Vector2(200, 200)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_sgfff")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldfishController"]
+shape = SubResource("CircleShape2D_7fopc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldfishController"]
+sprite_frames = SubResource("SpriteFrames_wcjk5")
+frame_progress = 0.492459
+
+[connection signal="body_entered" from="GoldfishController" to="GoldfishController" method="_on_body_entered"]
