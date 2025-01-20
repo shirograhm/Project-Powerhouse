@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b54g18nbd0roi" path="res://texures/player.png" id="1_p076o"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rktpd"]
-[ext_resource type="PackedScene" uid="uid://7rbt8oegjtj3" path="res://scenes/goldfish.tscn" id="2_pgix3"]
+[ext_resource type="PackedScene" uid="uid://dqleoyv2bmiwy" path="res://scenes/projectiles/antibody.tscn" id="2_uyq6j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qa2pt"]
 
@@ -10,7 +10,7 @@
 position = Vector2(500, 500)
 collision_mask = 22
 script = ExtResource("1_rktpd")
-Projectile = ExtResource("2_pgix3")
+Projectile = ExtResource("2_uyq6j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qa2pt")

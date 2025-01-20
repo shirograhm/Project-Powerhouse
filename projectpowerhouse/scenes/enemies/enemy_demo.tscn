@@ -7,6 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cdo2"]
 
 [node name="EnemyDemo" instance=ExtResource("1_r256y")]
+collision_mask = 5
 health = 10.0
 damage = 10.0
 move_speed = 20.0

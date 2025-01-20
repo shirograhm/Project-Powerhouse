@@ -37,6 +37,10 @@ func shoot():
 		var goldfish_projectile = projectile as goldfish
 		goldfish_projectile.direction = global_position.direction_to(target)
 		goldfish_projectile.look_at(target)
+	elif projectile is antibody:
+		var antibody_projectile = projectile as antibody
+		antibody_projectile.direction = global_position.direction_to(target)
+		antibody_projectile.look_at(target)
 
 func die():
 	queue_free()
