@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://clucb4erf6hfw"]
+[gd_scene load_steps=11 format=3 uid="uid://dx47jyehvtyke"]
 
 [ext_resource type="PackedScene" uid="uid://hv0evwawh25x" path="res://scenes/enemies/enemy_base.tscn" id="1_luw67"]
 [ext_resource type="Texture2D" uid="uid://cqqe3n4rptlo4" path="res://texures/green_guy.png" id="2_grmg1"]
@@ -52,6 +52,7 @@ radius = 8.3
 height = 35.75
 
 [node name="green_guy" instance=ExtResource("1_luw67")]
+texture_filter = 1
 move_speed = 20.0
 
 [node name="FollowBehavior" parent="." index="0" instance=ExtResource("2_k1kjx")]

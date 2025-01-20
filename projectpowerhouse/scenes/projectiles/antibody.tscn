@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqwvvpkrwe54o" path="res://texures/antibody.png" id="2_e3fii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jukcx"]
-radius = 16.0
+radius = 8.24621
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qg11i"]
 animations = [{
@@ -28,6 +28,7 @@ shape = SubResource("CircleShape2D_jukcx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_qg11i")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
