@@ -28,8 +28,8 @@ func _physics_process(delta: float) -> void:
 
 func shoot():
 	var projectile = Projectile.instantiate()
-	owner.add_child(projectile)
-	projectile.transform = transform
+	get_parent().add_child(projectile)
+	projectile.transform = global_transform
 	
 	if projectile is goldfish:
 		var goldfish_projectile = projectile as goldfish
