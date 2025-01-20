@@ -32,5 +32,5 @@ spawn_parent = NodePath("..")
 spawn_scene = ExtResource("4_ohd7j")
 player_node = NodePath("../Player")
 
-[node name="Panel" parent="." instance=ExtResource("6_3ns4i")]
+[node name="Hud" parent="." instance=ExtResource("6_3ns4i")]
 player_path = NodePath("../Player")

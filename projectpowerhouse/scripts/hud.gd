@@ -11,4 +11,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Label.text = "Health: " + str(player_node.health)
+	$HealthPanel/Label.text = "Health: " + str(player_node.health)
