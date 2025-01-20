@@ -9,6 +9,8 @@ class_name enemy_base extends Area2D
 @export var attack_speed := 1.0
 @export var player_node:player
 
+@export var enemy_pushback_amount := 0.9
+
 signal on_attack
 signal on_damaged(amount: float)
 signal on_death
@@ -45,6 +47,14 @@ func _on_body_exited(body: Node2D) -> void:
 		collided_player = null;
 	pass
 
+func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if (area is enemy_base):
+		# TODO: Get collision normal and overlap and move away accordingly
+		position += area.position.direction_to(position) * enemy_pushback_amount
+
+func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	pass # Replace with function body.
+
 func perform_attack():
 	on_attack.emit()
 	print(name + " attacked player")
@@ -59,6 +69,7 @@ func take_damage(amount: float) -> void:
 
 func die() -> void:
 	on_death.emit()
+	queue_free()
 
 func move(move_to: Vector2, dt: float) -> void:
 	var angle = position.angle_to_point(move_to)
