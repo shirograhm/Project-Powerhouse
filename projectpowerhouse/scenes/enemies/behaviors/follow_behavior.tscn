@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4mu353dd8rwh"]
+
+[ext_resource type="Script" path="res://scripts/enemies/behaviors/follow_behavior.gd" id="1_rvg6i"]
+
+[node name="FollowBehavior" type="Node"]
+script = ExtResource("1_rvg6i")
