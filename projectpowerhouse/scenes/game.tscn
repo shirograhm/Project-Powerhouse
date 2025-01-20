@@ -1,11 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://btlnqkoa2cth5"]
+[gd_scene load_steps=7 format=3 uid="uid://btlnqkoa2cth5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_drvb0"]
 [ext_resource type="Texture2D" uid="uid://bnaxccbfj8ein" path="res://texures/Virus.png" id="2_7b3vt"]
+[ext_resource type="PackedScene" uid="uid://dj38c8duk817q" path="res://scenes/player.tscn" id="3_mvtyn"]
+[ext_resource type="PackedScene" uid="uid://banm5oq63ip52" path="res://scenes/enemies/enemy_demo.tscn" id="4_ohd7j"]
+[ext_resource type="PackedScene" uid="uid://sovlqsvea7pm" path="res://scenes/enemies/spawner.tscn" id="5_qpqp8"]
+
+[sub_resource type="Curve2D" id="Curve2D_ir7ye"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 77, 35, 0, 0, 0, 0, 1065, 45, 0, 0, 0, 0, 1059, 598, 0, 0, 0, 0, 81, 593, 0, 0, 0, 0, 77, 36)
+}
+point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_drvb0")
 
 [node name="Virus" type="Sprite2D" parent="."]
+modulate = Color(0.0932763, 0.0859736, 0.0931363, 1)
 position = Vector2(570, 307)
+scale = Vector2(4, 4)
 texture = ExtResource("2_7b3vt")
+
+[node name="Player" parent="." instance=ExtResource("3_mvtyn")]
+position = Vector2(595, 302)
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("spawn_parent", "player_node") instance=ExtResource("5_qpqp8")]
+curve = SubResource("Curve2D_ir7ye")
+spawn_time = 2.0
+spawn_parent = NodePath("..")
+spawn_scene = ExtResource("4_ohd7j")
+player_node = NodePath("../Player")
