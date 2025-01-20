@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://btlnqkoa2cth5"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_drvb0"]
+[ext_resource type="Texture2D" uid="uid://bnaxccbfj8ein" path="res://texures/Virus.png" id="2_7b3vt"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_drvb0")
+
+[node name="Virus" type="Sprite2D" parent="."]
+position = Vector2(570, 307)
+texture = ExtResource("2_7b3vt")
