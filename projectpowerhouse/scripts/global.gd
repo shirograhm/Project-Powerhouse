@@ -4,8 +4,9 @@ var rng := RandomNumberGenerator.new()
 
 # Global data any class could use
 const GAME_FONT = preload("res://texures/yoster.ttf")
-const DURABILITY_MAX = 0.4
-const MIN_DAMAGE_CAP = 1.0
+const GAME_FONT_SIZE = 24.0
+const DURABILITY_MAX =  0.4
+const MIN_DAMAGE_CAP =  1.0
 
 # Number Popup Constants
 const NUMBER_POPUP_PREFAB = preload("res://scenes/utils/number_popup.tscn")

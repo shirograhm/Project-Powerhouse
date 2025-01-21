@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxt1hdrcduupm"]
+[gd_scene load_steps=2 format=3 uid="uid://bxt1hdrcduupm"]
 
 [ext_resource type="Script" path="res://scripts/utils/number_popup.gd" id="1_svtiy"]
-[ext_resource type="FontFile" uid="uid://6fadjqrs0gtm" path="res://texures/yoster.ttf" id="2_6frht"]
 
 [node name="NumberPopup" type="Node2D"]
 z_index = 1
@@ -15,8 +14,6 @@ offset_top = -25.0
 offset_right = 88.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = ExtResource("2_6frht")
-theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "13"
 scroll_active = false

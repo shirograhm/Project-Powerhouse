@@ -17,6 +17,8 @@ var text_info = ""
 
 func _ready() -> void:
 	self.position += Vector2(Global.rng.randf() * 5, Global.rng.randf() * 5)
+	text_label.add_theme_font_override("normal_font", Global.GAME_FONT)
+	text_label.add_theme_font_size_override("normal_font_size", Global.GAME_FONT_SIZE)
 	text_label.text = ""
 	if is_crit:
 		text_label.add_image(crit_icon, 24.0, 24.0)
