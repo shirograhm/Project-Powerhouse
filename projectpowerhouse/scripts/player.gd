@@ -46,6 +46,7 @@ func shoot():
 		# current attack is melee NYI
 		print("melee attack")
 	else:
+		SoundManager.play_sound(SoundManager.sound_effect.SHOTGUN_SHOOT)
 		var projectile = Projectile.instantiate()
 		get_parent().add_child(projectile)
 		projectile.transform = global_transform

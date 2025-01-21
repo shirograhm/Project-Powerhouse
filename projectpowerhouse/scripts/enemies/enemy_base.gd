@@ -78,6 +78,7 @@ func die() -> void:
 		this_drop.type = drop_id
 		this_drop.transform = transform
 		add_sibling(this_drop)
+	SoundManager.play_sound(SoundManager.sound_effect.BOO_WOO_WOO)
 	on_death.emit()
 	queue_free()
 
