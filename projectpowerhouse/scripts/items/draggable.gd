@@ -7,6 +7,8 @@ var my_inventory:inv = null
 var is_mouse_over := false
 var is_dragging := false
 var lock_position:Vector2
+var lock_rotation:float
+var lock_points:Array[Vector2i] # HACK b/c i dont wanna do math
 var drag_offset:Vector2
 
 func _ready() -> void:
@@ -14,7 +16,7 @@ func _ready() -> void:
 		my_item = get_parent()
 	lock_position = my_item.position
 
-func rotate_item() -> void:
+func rotate_item_cc() -> void:
 	my_item.rotate(deg_to_rad(-90))
 	var rotated:Array[Vector2i] = []
 	for i in range(my_item.points_in_inv.size()):
@@ -44,7 +46,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return;
 	
 	if (is_dragging && event is InputEventKey && event.is_action_pressed("ui_text_indent")):
-		rotate_item()
+		rotate_item_cc()
 		get_viewport().set_input_as_handled()
 		return
 	
@@ -58,6 +60,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					print("Nice, i was put in inventory")
 				else:
 					print("Nope, cant be placed in inventory here")
+					# reset rotation
+					my_item.rotation_degrees = lock_rotation
+					my_item.points_in_inv = lock_points
 			else:
 				my_item.set_inv(null, true)
 				lock_position = my_item.global_position
@@ -65,6 +70,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			is_dragging = true
 			lock_position = my_item.position
+			lock_rotation = my_item.rotation_degrees
+			lock_points = my_item.points_in_inv
 			drag_offset = get_viewport().get_mouse_position() - my_item.global_position
 
 func _on_area_entered(area: Area2D) -> void:

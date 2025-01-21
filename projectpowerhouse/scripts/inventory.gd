@@ -29,7 +29,7 @@ func can_place(item:item_base) -> bool:
 	for i in range(item_points.size()):
 		var pos := Vector2i(item_pos + item_points[i])
 		if (pos.x < 0 || pos.y < 0 || 
-			pos.x > size.x || pos.y > size.y || 
+			pos.x >= size.x || pos.y >= size.y || 
 			(inventory.has(pos) && inventory[pos] != item)):
 			return false
 	return true
