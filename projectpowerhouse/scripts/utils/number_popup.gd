@@ -21,7 +21,7 @@ func _ready() -> void:
 	text_label.add_theme_font_size_override("normal_font_size", Global.GAME_FONT_SIZE)
 	text_label.text = ""
 	if is_crit:
-		text_label.add_image(crit_icon, 24.0, 24.0)
+		text_label.add_image(crit_icon, Global.GAME_FONT_SIZE, Global.GAME_FONT_SIZE)
 	text_label.push_color(self.text_color)
 	text_label.append_text(text_info)
 	life_timer.start(LIFETIME)

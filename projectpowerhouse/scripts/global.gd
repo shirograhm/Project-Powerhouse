@@ -17,9 +17,10 @@ const DAMAGE_NUM_COLOR = Color.INDIAN_RED
 const HEAL_NUM_COLOR   = Color.LIME_GREEN
 
 # Player Constants
-const BASE_MAX_HEALTH  = 50.0
-const BASE_CRIT_CHANCE =  0.5	# 50% base crit chance
-const BASE_CRIT_DAMAGE =  1.6	# 60% bonus damage on crits
+const BASE_MAX_HEALTH  =  50.0
+const BASE_CRIT_CHANCE =   0.5	# 50% base crit chance
+const BASE_CRIT_DAMAGE =   1.6	# 60% bonus damage on crits
+const BASE_MOVE_SPEED  = 200.0
 const ATTACK_DELAY = 0.8
 const IFRAME_DELAY = 0.2
 

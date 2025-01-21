@@ -15,7 +15,7 @@ var defense: float     = 0.0
 var durability: float  = 0.0
 var crit_chance: float = Global.BASE_CRIT_CHANCE
 var crit_damage: float = Global.BASE_CRIT_DAMAGE
-var movespeed: float   = 200.0
+var movespeed: float   = Global.BASE_MOVE_SPEED
 
 var target:Vector2
 var set_attack := attack_type.RANGED
