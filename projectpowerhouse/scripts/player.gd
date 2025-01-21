@@ -1,15 +1,23 @@
 class_name player extends CharacterBody2D
 
-@export var speed := 200.0
-@export var max_health := 50.0
-@export var attack_delay := 0.8
-@export var iframe_delay := 0.2
 @export var Projectile:PackedScene
 
+@onready var iframe_timer := $IFrameTimer
+@onready var attack_timer := $AttackTimer
+
+var is_iframe_active = false
+var can_attack = true
+
+# Unit Stats (TODO: Consolidate into a separate file?)
+var max_health: float  = Global.BASE_MAX_HEALTH
+var health: float      = Global.BASE_MAX_HEALTH
+var defense: float     = 0.0
+var durability: float  = 0.0
+var crit_chance: float = Global.BASE_CRIT_CHANCE
+var crit_damage: float = Global.BASE_CRIT_DAMAGE
+var movespeed: float   = 200.0
+
 var target:Vector2
-var attack_timer:float
-var iframe_timer:float
-var health:float
 var set_attack := attack_type.RANGED
 
 # Will need to change with items system
@@ -19,20 +27,14 @@ enum attack_type {RANGED, AUTO, MELEE}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	attack_timer = 0
-	iframe_timer = 0
-	health = max_health
+	pass
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	
-	velocity = input_direction * speed
+	velocity = input_direction * movespeed
 
 func _process(delta: float) -> void:
-	if attack_timer > 0:
-		attack_timer -= delta
-	if iframe_timer > 0:
-		iframe_timer -= delta
+	pass
 
 func _physics_process(delta: float) -> void:
 	get_input()
@@ -48,6 +50,7 @@ func shoot():
 	else:
 		SoundManager.play_sound(SoundManager.sound_effect.SHOTGUN_SHOOT)
 		var projectile = Projectile.instantiate()
+		projectile.set_player(self)
 		get_parent().add_child(projectile)
 		projectile.transform = global_transform
 		
@@ -63,18 +66,36 @@ func shoot():
 func die():
 	queue_free()
 
-func take_damage(amount: float):
-	if iframe_timer > 0:
+func take_damage(attacker: enemy_base, amount: float, is_crit: bool):
+	if is_iframe_active:
 		return
-	health -= amount
-	iframe_timer = iframe_delay
-	if (health <= 0):
-		die()
+	else:
+		is_iframe_active = true
+		iframe_timer.start(Global.IFRAME_DELAY)
+		var post_mitigated = Global.get_mitigation(self.defense, self.durability, amount)
+		Global.spawn_number_popup(post_mitigated, Global.NumberType.DAMAGE, is_crit, self)
+		health -= post_mitigated
+		if (health <= 0):
+			die()
+
+func roll_crit() -> bool:
+	return crit_chance > Global.rng.randf()
+
+func get_current_health() -> float:
+	return health
+
+func get_max_health() -> float:
+	return max_health
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		if attack_timer > 0:
-			return
+	if can_attack and event.is_action_pressed("shoot"):
 		target = get_global_mouse_position()
-		attack_timer = attack_delay
+		attack_timer.start(Global.ATTACK_DELAY)
+		can_attack = false
 		shoot()
+
+func _on_attack_timer_timeout() -> void:
+	can_attack = true
+
+func _on_i_frame_timer_timeout() -> void:
+	is_iframe_active = false

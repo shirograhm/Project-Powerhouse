@@ -1,17 +1,21 @@
 class_name enemy_base extends Area2D
 
-@export var health := 1.0
-@export var damage := 1.0
-@export var defence := 1.0
-@export var durability := 1.0
-@export var move_speed := 1.0
-@export var acceleration := 0.5
-@export var attack_speed := 1.0
 @export var player_node:player
 
 @export var enemy_pushback_amount := 0.9
 @export var drop_id := -1
 
+# Unit Stats (TODO: Consolidate into a separate file?)
+@export var max_health   :=  1.0
+@export var health       :=  1.0
+@export var damage       :=  1.0
+@export var atk_speed    :=  1.0
+@export var defense      :=  0.0
+@export var durability   :=  0.0
+@export var crit_chance  :=  0.0
+@export var crit_damage  :=  0.0
+@export var movespeed    := 50.0
+@export var acceleration :=  0.5
 
 signal on_attack
 signal on_damaged(amount: float)
@@ -32,7 +36,7 @@ func init(player_node: player):
 
 func _process(delta: float) -> void:
 	if (collided_player != null):
-		if (time_since_attack >= attack_speed):
+		if (time_since_attack >= atk_speed):
 			time_since_attack = 0;
 			perform_attack()
 
@@ -63,14 +67,26 @@ func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, l
 func perform_attack():
 	on_attack.emit()
 	print(name + " attacked player")
-	player_node.take_damage(damage)
+	player_node.take_damage(self, damage, self.roll_crit())
 
 #################### PUBLIC FUNKIES ####################
-func take_damage(amount: float) -> void:
-	health -= amount
+func take_damage(amount: float, is_crit: bool) -> void:
+	var post_mitigated = Global.get_mitigation(self.defense, self.durability, amount)
+	Global.spawn_number_popup(post_mitigated, Global.NumberType.DAMAGE, is_crit, self)
+	health -= post_mitigated
 	on_damaged.emit(amount)
 	if (health <= 0):
 		die()
+
+func roll_crit() -> bool:
+	return crit_chance > Global.rng.randf()
+
+func get_current_health() -> float:
+	return health
+
+func get_max_health() -> float:
+	# return max_health
+	return 0.0
 
 func die() -> void:
 	if drop_id >= 0:
@@ -85,5 +101,5 @@ func die() -> void:
 func move(move_to: Vector2, dt: float) -> void:
 	var angle = position.angle_to_point(move_to)
 	var angleVec = Vector2.from_angle(angle)
-	var movement = angleVec * move_speed;
+	var movement = angleVec * movespeed;
 	velocity = velocity.lerp(movement, acceleration * dt);

@@ -6,6 +6,7 @@ class_name projectile_base extends Area2D
 @export var damage := 5.0
 @export var spin_rate := 0
 
+var player_node: player
 var life_timer:float
 
 func _ready() -> void:
@@ -19,6 +20,9 @@ func _process(delta: float) -> void:
 		
 func handle_collision(collided: Node2D):
 	pass
+
+func set_player(node_in: player) -> void:
+	self.player_node = node_in
 
 func _physics_process(delta: float) -> void:
 	position += direction.normalized() * speed  * delta

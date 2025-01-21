@@ -22,3 +22,10 @@ hframes = 3
 
 [node name="Player" type="Node2D" parent="."]
 texture_filter = 1
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="IFrameTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="IFrameTimer" to="." method="_on_i_frame_timer_timeout"]
