@@ -26,7 +26,7 @@ var velocity := Vector2.ZERO;
 var time_since_attack := 0.0;
 
 # TODO move to dedicated drop spawner (wave timer?)
-var _drop_scene := preload("res://scenes/drop.tscn")
+var _drop_scene := preload("res://scenes/items/drop.tscn")
 
 func _ready() -> void:
 	pass

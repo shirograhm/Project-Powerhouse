@@ -1,16 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://ushxffhp32d2"]
 
-[ext_resource type="Script" path="res://scripts/items/drop.gd" id="1_718k1"]
-[ext_resource type="Texture2D" uid="uid://chqnjrlxq2hce" path="res://texures/items/flagella.png" id="1_guqg4"]
-[ext_resource type="Texture2D" uid="uid://bdebq076ae8sm" path="res://texures/items/golgi_apparatus.png" id="2_p771w"]
-[ext_resource type="Texture2D" uid="uid://bqryfagqbx1hs" path="res://texures/items/mitochondria.png" id="3_0i3n1"]
-[ext_resource type="Texture2D" uid="uid://cdyb1cw0edu0a" path="res://texures/items/phospholipid.png" id="4_w72xj"]
+[ext_resource type="Script" path="res://scripts/items/drop.gd" id="1_ev8e2"]
+[ext_resource type="Texture2D" uid="uid://chqnjrlxq2hce" path="res://texures/items/flagella.png" id="2_o25t8"]
+[ext_resource type="Texture2D" uid="uid://bdebq076ae8sm" path="res://texures/items/golgi_apparatus.png" id="3_ym38t"]
+[ext_resource type="Texture2D" uid="uid://bqryfagqbx1hs" path="res://texures/items/mitochondria.png" id="4_su0ac"]
+[ext_resource type="Texture2D" uid="uid://cdyb1cw0edu0a" path="res://texures/items/phospholipid.png" id="5_vaboj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h3qqt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_guqg4")
+"texture": ExtResource("2_o25t8")
 }],
 "loop": true,
 "name": &"flagella",
@@ -18,7 +18,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_p771w")
+"texture": ExtResource("3_ym38t")
 }],
 "loop": true,
 "name": &"golgi",
@@ -26,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_0i3n1")
+"texture": ExtResource("4_su0ac")
 }],
 "loop": true,
 "name": &"mitochondria",
@@ -34,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_w72xj")
+"texture": ExtResource("5_vaboj")
 }],
 "loop": true,
 "name": &"phospholipid",
@@ -47,7 +47,7 @@ radius = 8.544
 [node name="Drop" type="Area2D"]
 texture_filter = 1
 collision_layer = 32
-script = ExtResource("1_718k1")
+script = ExtResource("1_ev8e2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
