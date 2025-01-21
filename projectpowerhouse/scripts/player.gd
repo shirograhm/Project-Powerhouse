@@ -81,6 +81,9 @@ func take_damage(attacker: enemy_base, amount: float, is_crit: bool):
 func roll_crit() -> bool:
 	return crit_chance > Global.rng.randf()
 
+func get_crit_damage() -> float:
+	return crit_damage
+
 func get_current_health() -> float:
 	return health
 

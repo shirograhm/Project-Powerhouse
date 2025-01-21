@@ -6,7 +6,10 @@ var collided_enemy:enemy_base = null;
 func handle_collision(collided: Node2D):
 	if collided is enemy_base:
 		collided_enemy = collided as enemy_base
-		collided_enemy.take_damage(damage, player_node.roll_crit())
+		var critted = player_node.roll_crit()
+		if critted:
+			damage *= player_node.get_crit_damage()
+		collided_enemy.take_damage(damage, critted)
 		queue_free()
 	else:
 		queue_free()
