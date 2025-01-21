@@ -46,7 +46,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						print("Nope, not here")
 				else:
-					my_item.set_in_inv(false)
+					my_item.set_inv(null)
 			else:
 				is_dragging = true
 				lock_position = my_item.position

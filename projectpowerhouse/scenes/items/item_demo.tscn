@@ -3,13 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://cft2axe0ftjw1" path="res://scenes/items/item_base.tscn" id="1_8goex"]
 [ext_resource type="Texture2D" uid="uid://chqnjrlxq2hce" path="res://texures/items/flagella.png" id="2_h27g2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_noiw8"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_el4pp"]
+size = Vector2(54, 20)
 
 [node name="item_demo" instance=ExtResource("1_8goex")]
+size_in_inv = Vector2i(2, 1)
 
 [node name="Flagella" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_h27g2")
 
+[node name="Flagella2" type="Sprite2D" parent="." index="1"]
+position = Vector2(32, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_h27g2")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="draggable" index="0"]
-shape = SubResource("CircleShape2D_noiw8")
+position = Vector2(17, 0)
+shape = SubResource("RectangleShape2D_el4pp")
