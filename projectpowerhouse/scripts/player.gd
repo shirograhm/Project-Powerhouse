@@ -11,6 +11,8 @@ var attack_timer:float
 var iframe_timer:float
 var health:float
 
+# TODO need auto attack and close range attack
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	attack_timer = 0

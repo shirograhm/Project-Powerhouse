@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	update_HUD_values()
 
 func update_HUD_values() -> void:
-	$'HUDPanel/HealthBar/HealthLabela'.text = "[center]" + str(player_node.health) + " out of " + str(player_node.max_health)
+	$'HUDPanel/HealthBar/HealthLabel'.text = "[center]" + str(player_node.health) + " out of " + str(player_node.max_health)
 	$HUDPanel/HealthBar.min_value = 0
 	$HUDPanel/HealthBar.max_value = player_node.max_health
 	$HUDPanel/HealthBar.value = player_node.health
