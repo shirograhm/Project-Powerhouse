@@ -40,4 +40,4 @@ static func spawn_number_popup(value: float, num_type: Global.NumberType, is_cri
 	var number_obj = NUMBER_POPUP_PREFAB.instantiate()
 	number_obj.set_position(affected_node.position)
 	number_obj.set_parameters(value, num_type, is_crit)
-	affected_node.get_parent().add_child(number_obj)
+	affected_node.add_sibling(number_obj)
