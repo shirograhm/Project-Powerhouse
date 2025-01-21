@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://ushxffhp32d2"]
+
+[ext_resource type="Script" path="res://scripts/items/drop.gd" id="1_718k1"]
+[ext_resource type="Texture2D" uid="uid://chqnjrlxq2hce" path="res://texures/items/flagella.png" id="1_guqg4"]
+[ext_resource type="Texture2D" uid="uid://bdebq076ae8sm" path="res://texures/items/golgi_apparatus.png" id="2_p771w"]
+[ext_resource type="Texture2D" uid="uid://bqryfagqbx1hs" path="res://texures/items/mitochondria.png" id="3_0i3n1"]
+[ext_resource type="Texture2D" uid="uid://cdyb1cw0edu0a" path="res://texures/items/phospholipid.png" id="4_w72xj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h3qqt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_guqg4")
+}],
+"loop": true,
+"name": &"flagella",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p771w")
+}],
+"loop": true,
+"name": &"golgi",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0i3n1")
+}],
+"loop": true,
+"name": &"mitochondria",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_w72xj")
+}],
+"loop": true,
+"name": &"phospholipid",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_scbp0"]
+radius = 19.0
+
+[node name="Drop" type="Area2D"]
+texture_filter = 1
+collision_layer = 32
+script = ExtResource("1_718k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h3qqt")
+animation = &"phospholipid"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_scbp0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -10,6 +10,8 @@ class_name enemy_base extends Area2D
 @export var player_node:player
 
 @export var enemy_pushback_amount := 0.9
+@export var drop_id := -1
+
 
 signal on_attack
 signal on_damaged(amount: float)
@@ -18,6 +20,9 @@ signal on_death
 var collided_player:player = null;
 var velocity := Vector2.ZERO;
 var time_since_attack := 0.0;
+
+# TODO move to dedicated drop spawner (wave timer?)
+var _drop_scene := preload("res://scenes/drop.tscn")
 
 func _ready() -> void:
 	pass
@@ -68,6 +73,11 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
+	if drop_id >= 0:
+		var this_drop = _drop_scene.instantiate() as drop
+		this_drop.type = drop_id
+		this_drop.transform = transform
+		add_sibling(this_drop)
 	on_death.emit()
 	queue_free()
 
