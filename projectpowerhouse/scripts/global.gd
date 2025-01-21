@@ -29,7 +29,7 @@ func _ready() -> void:
 ## Defence reduces a flat amount of damage. This is applied after durability
 ## Function:
 ## 		damage = incoming * (1 - durability) - defense
-##		damage cannot be reduced below 5
+##		damage cannot be reduced below MIN_DAMAGE_CAP
 static func get_mitigation(defense_in: float, durability_in: float, damage_in: float) -> float:
 	durability_in = min(durability_in, DURABILITY_MAX)
 	var after_calc = max(damage_in * (1 - durability_in) - defense_in, MIN_DAMAGE_CAP)
