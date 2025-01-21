@@ -45,13 +45,11 @@ func _physics_process(delta: float) -> void:
 	time_since_attack += delta;
 
 func _on_body_entered(body: Node2D) -> void:
-	# TODO: Check if body is player
 	if (body is player):
 		collided_player = body as player
 	pass
 
 func _on_body_exited(body: Node2D) -> void:
-	# TODO: Check if body is player
 	if (body is player):
 		collided_player = null;
 	pass
@@ -93,7 +91,7 @@ func die() -> void:
 		var this_drop = _drop_scene.instantiate() as drop
 		this_drop.type = drop_id
 		this_drop.transform = transform
-		add_sibling(this_drop)
+		call_deferred("add_sibling", this_drop)
 	SoundManager.play_sound(SoundManager.sound_effect.BOO_WOO_WOO)
 	on_death.emit()
 	queue_free()

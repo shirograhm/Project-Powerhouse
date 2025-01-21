@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bivsiipujf3tr"]
+
+[ext_resource type="PackedScene" uid="uid://cft2axe0ftjw1" path="res://scenes/items/item_base.tscn" id="1_8goex"]
+[ext_resource type="Texture2D" uid="uid://chqnjrlxq2hce" path="res://texures/items/flagella.png" id="2_h27g2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_noiw8"]
+
+[node name="item_demo" instance=ExtResource("1_8goex")]
+
+[node name="Flagella" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_h27g2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="draggable" index="0"]
+shape = SubResource("CircleShape2D_noiw8")

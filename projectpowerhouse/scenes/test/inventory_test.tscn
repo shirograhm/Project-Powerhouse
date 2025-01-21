@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbykyojergyrg"]
+
+[ext_resource type="PackedScene" uid="uid://doxqyhir31uae" path="res://scenes/inventory.tscn" id="1_usl3y"]
+[ext_resource type="PackedScene" uid="uid://bivsiipujf3tr" path="res://scenes/items/item_demo.tscn" id="2_4csra"]
+
+[node name="InventoryTest" type="Node2D"]
+
+[node name="inventory" parent="." instance=ExtResource("1_usl3y")]
+position = Vector2(316, 195)
+
+[node name="item_demo" parent="." instance=ExtResource("2_4csra")]
+position = Vector2(97, 112)
+
+[node name="item_demo2" parent="." instance=ExtResource("2_4csra")]
+position = Vector2(725, 37)
+
+[node name="item_demo3" parent="." instance=ExtResource("2_4csra")]
+position = Vector2(728, 363)
+
+[node name="item_demo4" parent="." instance=ExtResource("2_4csra")]
+position = Vector2(81, 363)
