@@ -3,7 +3,7 @@ extends Node
 var rng := RandomNumberGenerator.new()
 
 # Global data any class could use
-const GAME_FONT = preload("res://texures/yoster.ttf")
+const GAME_FONT = preload("res://texures/SuperChips.ttf")
 const GAME_FONT_SIZE = 24.0
 const DURABILITY_MAX =  0.4
 const MIN_DAMAGE_CAP =  1.0
