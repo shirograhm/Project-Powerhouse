@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbykyojergyrg"]
+[gd_scene load_steps=4 format=3 uid="uid://cbykyojergyrg"]
 
 [ext_resource type="PackedScene" uid="uid://doxqyhir31uae" path="res://scenes/inventory.tscn" id="1_usl3y"]
 [ext_resource type="PackedScene" uid="uid://bivsiipujf3tr" path="res://scenes/items/item_demo.tscn" id="2_4csra"]
+[ext_resource type="PackedScene" uid="uid://bmdt3aeem0yvb" path="res://scenes/player.tscn" id="2_rrdcs"]
 
 [node name="InventoryTest" type="Node2D"]
-
-[node name="inventory" parent="." instance=ExtResource("1_usl3y")]
-position = Vector2(316, 195)
 
 [node name="item_demo" parent="." instance=ExtResource("2_4csra")]
 position = Vector2(97, 112)
@@ -19,3 +17,8 @@ position = Vector2(728, 363)
 
 [node name="item_demo4" parent="." instance=ExtResource("2_4csra")]
 position = Vector2(81, 363)
+
+[node name="PlayerController" parent="." instance=ExtResource("2_rrdcs")]
+position = Vector2(464, 264)
+
+[node name="inventory" parent="PlayerController" instance=ExtResource("1_usl3y")]

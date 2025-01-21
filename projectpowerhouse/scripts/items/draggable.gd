@@ -21,11 +21,9 @@ func _process(delta: float) -> void:
 			my_item.position = lerp(my_item.position, lock_position, 5 * delta)
 
 func handle_drag():
-	my_item.global_position = inv.grid_to_world(
-				inv.world_to_grid(
+	my_item.global_position = inv.relative_snap_to_grid(
 					get_viewport().get_mouse_position()
 					)
-				) - Vector2.ONE * inv.GRID_SIZE * .5;
 
 func _mouse_enter() -> void:
 	is_mouse_over = true;
@@ -34,20 +32,22 @@ func _mouse_exit() -> void:
 	is_mouse_over = false;
 
 func _unhandled_input(event: InputEvent) -> void:
-	if (is_mouse_over && can_drag):
+	if (can_drag):
 		if (event is InputEventMouseButton and event.is_pressed()):
-			get_viewport().set_input_as_handled()
 			if (is_dragging):
+				get_viewport().set_input_as_handled()
 				is_dragging = false
 				if (my_inventory != null):
 					if (my_inventory.place_item(my_item)):
 						lock_position = my_item.position
 						print("Nice, i was put in inventory")
 					else:
-						print("Nope, not here")
+						print("Nope, cant be placed in inventory here")
 				else:
-					my_item.set_inv(null)
-			else:
+					my_item.set_inv(null, true)
+					lock_position = my_item.global_position
+			elif (is_mouse_over):
+				get_viewport().set_input_as_handled()
 				is_dragging = true
 				lock_position = my_item.position
 

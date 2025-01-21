@@ -8,7 +8,6 @@
 
 [node name="PlayerController" type="CharacterBody2D"]
 texture_filter = 1
-position = Vector2(500, 500)
 collision_mask = 54
 script = ExtResource("1_rktpd")
 Projectile = ExtResource("2_uyq6j")

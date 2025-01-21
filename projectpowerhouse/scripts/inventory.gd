@@ -8,7 +8,10 @@ const GRID_SIZE := 32
 # defines pos for each item size
 var inventory := {}
 
+static var _instance:inv;
+
 func _ready() -> void:
+	_instance = self;
 	var area = $Area2D
 	area.position += size * GRID_SIZE * .5
 	var collision_shape = $Area2D/CollisionShape2D
@@ -18,7 +21,7 @@ func _ready() -> void:
 
 func can_place(item:item_base) -> bool:
 	var item_size = item.size_in_inv;
-	var item_pos = world_to_grid(item.global_position) - get_my_grid_pos();
+	var item_pos = relative_world_to_grid(item.global_position)
 	for x in range(item_size.x):
 		for y in range(item_size.y):
 			var pos := Vector2i(item_pos + Vector2i(x, y))
@@ -29,18 +32,19 @@ func can_place(item:item_base) -> bool:
 	return true
 
 func place_item(item:item_base) -> bool:
+	if (contains_item(item)):
+		remove_item(item)
 	if (can_place(item) == false):
 		return false;
 	var item_size = item.size_in_inv;
-	var item_pos = world_to_grid(item.global_position) - get_my_grid_pos();
+	var item_pos = relative_world_to_grid(item.global_position)
 	for x in range(item_size.x):
 		for y in range(item_size.y):
 			var pos := Vector2i(item_pos + Vector2i(x, y))
 			inventory[pos] = item
-	item.get_parent().remove_child(item)
-	add_child(item)
-	item.position = grid_to_world(item_pos) - Vector2i.ONE * GRID_SIZE * .5
-	item.set_inv(self)
+	item.position = grid_to_world(item_pos) - get_grid_world_offset()
+	item.set_inv(self, false)
+	queue_redraw()
 	return true;
 
 func remove_item(item:item_base) -> bool:
@@ -52,32 +56,68 @@ func remove_item(item:item_base) -> bool:
 			print("Erasing " + i.name + " at " + str(key))
 	for i in range(erase_keys.size()):
 		inventory.erase(erase_keys[i])
-	remove_child(item)
-	item.set_inv(null)
+	item.set_inv(null, false)
 	if (erase_keys.size() > 0):
 		print("Removed " + item.name)
 	else:
 		print("Item " + item.name + " was not found in inv")
+	queue_redraw()
 	return erase_keys.size() > 0;
 
+func contains_item(item:item_base):
+	for key in inventory:
+		var i = inventory[key]
+		if (i == item):
+			return true;
+	return false;
+
 func get_my_grid_pos() -> Vector2i:
-	return world_to_grid(position)
+	return world_to_grid(global_position)
 
 func _draw() -> void:
 	draw_circle(position, 8, Color.AQUAMARINE)
 	var square_size = Vector2.ONE * GRID_SIZE;
 	for x in range(size.x):
 		for y in range(size.y):
-			var pos = grid_to_world(Vector2i(x, y))
-			draw_rect(Rect2(pos, square_size), Color.AQUA, false)
+			var gridPos = Vector2i(x, y)
+			var pos = grid_to_world(gridPos)
+			var rect = Rect2(pos, square_size)
+			if (inventory.has(gridPos)):
+				draw_rect(rect, Color.AQUA, true)
+			else:
+				draw_rect(rect, Color.AQUA, false)
 
 #################### STATIC GRID FUNKIES ####################
 
+static func relative_world_to_grid(pos:Vector2) -> Vector2i:
+	if (_instance == null):
+		printerr("No grid instance in scene")
+		return Vector2i.ZERO
+	var offset = Vector2(int(_instance.global_position.x) % GRID_SIZE, int(_instance.global_position.y) % GRID_SIZE)
+	return world_to_grid(pos - offset) - _instance.get_my_grid_pos()
+
+static func relative_grid_to_world(pos:Vector2i) -> Vector2:
+	if (_instance == null):
+		printerr("No grid instance in scene")
+		return Vector2i.ZERO
+	var offset = Vector2(int(_instance.global_position.x) % GRID_SIZE, int(_instance.global_position.y) % GRID_SIZE)
+	return grid_to_world(pos) + offset + grid_to_world(_instance.get_my_grid_pos()) + get_grid_world_offset()
+
+static func relative_snap_to_grid(pos:Vector2) -> Vector2:
+	if (_instance == null):
+		printerr("No grid instance in scene")
+		return Vector2i.ZERO
+	var offset = Vector2(int(_instance.global_position.x) % GRID_SIZE, int(_instance.global_position.y) % GRID_SIZE)
+	return snap_to_grid(pos) + offset + get_grid_world_offset()
+
 static func snap_to_grid(pos:Vector2) -> Vector2:
-	return pos.snapped(Vector2(GRID_SIZE, GRID_SIZE))
+	return (pos).snapped(Vector2(GRID_SIZE, GRID_SIZE))
 
 static func world_to_grid(pos:Vector2) -> Vector2i:
-	return snap_to_grid(pos) / GRID_SIZE
+	return snap_to_grid(pos + get_grid_world_offset()) / GRID_SIZE
 
 static func grid_to_world(pos:Vector2i) -> Vector2:
-	return pos * GRID_SIZE;
+	return Vector2(pos) * GRID_SIZE;
+	
+static func get_grid_world_offset() -> Vector2:
+	return -Vector2.ONE * GRID_SIZE * .5;
