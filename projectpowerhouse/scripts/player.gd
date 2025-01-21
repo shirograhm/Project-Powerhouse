@@ -7,6 +7,7 @@ class_name player extends CharacterBody2D
 
 var is_iframe_active = false
 var can_attack = true
+var is_dead = false
 
 # Unit Stats (TODO: Consolidate into a separate file?)
 var max_health: float  = Global.BASE_MAX_HEALTH
@@ -30,6 +31,8 @@ func _ready() -> void:
 	pass
 
 func get_input():
+	if is_dead:
+		return
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * movespeed
 
@@ -65,7 +68,7 @@ func shoot():
 
 func die():
 	# TODO popup menu
-	get_tree().paused = true
+	is_dead = true
 	print("You died")
 
 func take_damage(attacker: enemy_base, amount: float, is_crit: bool):

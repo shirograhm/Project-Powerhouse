@@ -8,6 +8,7 @@ extends Path2D
 
 var time_since_spawn := 0.0
 
+
 var total_size:float;
 
 func _ready() -> void:
@@ -22,9 +23,14 @@ func _ready() -> void:
 		prev = point
 
 func _process(delta: float) -> void:
-	if (time_since_spawn >= spawn_time):
-		time_since_spawn = 0;
-		spawn();
+	if player_node.is_dead:
+		if spawn_parent:
+			spawn_parent.queue_free()
+			spawn_parent = null
+	else:
+		if (time_since_spawn >= spawn_time):
+			time_since_spawn = 0;
+			spawn();
 
 func _physics_process(delta: float) -> void:
 	time_since_spawn += delta;

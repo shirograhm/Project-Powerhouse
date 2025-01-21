@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_drvb0"]
 [ext_resource type="Texture2D" uid="uid://bnaxccbfj8ein" path="res://texures/Virus.png" id="2_7b3vt"]
 [ext_resource type="PackedScene" uid="uid://bmdt3aeem0yvb" path="res://scenes/player.tscn" id="3_mvtyn"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/spawner.tscn" id="5_qpqp8"]
+[ext_resource type="PackedScene" uid="uid://cihtavcsuvfs4" path="res://scenes/enemies/spawner.tscn" id="5_qpqp8"]
 [ext_resource type="PackedScene" uid="uid://d4co5sbcgnc11" path="res://scenes/hud.tscn" id="6_3ns4i"]
 
 [sub_resource type="Curve2D" id="Curve2D_ir7ye"]
@@ -27,8 +27,10 @@ position = Vector2(595, 302)
 [node name="Spawner" parent="." node_paths=PackedStringArray("spawn_parent", "player_node") instance=ExtResource("5_qpqp8")]
 curve = SubResource("Curve2D_ir7ye")
 spawn_time = 2.0
-spawn_parent = NodePath("..")
+spawn_parent = NodePath("../EnemyHolder")
 player_node = NodePath("../Player")
 
 [node name="Hud" parent="." instance=ExtResource("6_3ns4i")]
 player_path = NodePath("../Player")
+
+[node name="EnemyHolder" type="Node2D" parent="."]

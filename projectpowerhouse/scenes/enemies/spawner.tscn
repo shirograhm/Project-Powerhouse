@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://sovlqsvea7pm"]
+[gd_scene load_steps=7 format=3 uid="uid://cihtavcsuvfs4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/spawner.gd" id="1_a3opm"]
 [ext_resource type="PackedScene" uid="uid://banm5oq63ip52" path="res://scenes/enemies/enemy_demo.tscn" id="2_a1l5d"]
 [ext_resource type="Script" path="res://resources/enemies/enemy_spawn_res.gd" id="2_wnv8m"]
-[ext_resource type="PackedScene" uid="uid://clucb4erf6hfw" path="res://scenes/enemies/green_guy.tscn" id="4_w4yxr"]
+[ext_resource type="PackedScene" uid="uid://dx47jyehvtyke" path="res://scenes/enemies/green_guy.tscn" id="4_w4yxr"]
 
 [sub_resource type="Resource" id="Resource_8qy8c"]
 script = ExtResource("2_wnv8m")
