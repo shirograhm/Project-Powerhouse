@@ -3,12 +3,13 @@ class_name inv extends Node2D
 const GRID_SIZE := 32
 
 @export var size := Vector2i.ONE
+@export var draw_color := Color.CYAN
+@export var draw_fill_color := Color(.1, .1, .8, .2)
 
 # map (x, y) -> item_base
 # defines pos for each item size
 var inventory := {}
-
-static var _instance:inv;
+static var _instance:inv = null;
 
 func _ready() -> void:
 	_instance = self;
@@ -19,29 +20,30 @@ func _ready() -> void:
 	shape.size = size * GRID_SIZE
 	collision_shape.shape = shape
 
+func get_items() -> Array:
+	return inventory.values()
+
 func can_place(item:item_base) -> bool:
-	var item_size = item.size_in_inv;
+	var item_points = item.points_in_inv;
 	var item_pos = relative_world_to_grid(item.global_position)
-	for x in range(item_size.x):
-		for y in range(item_size.y):
-			var pos := Vector2i(item_pos + Vector2i(x, y))
-			if (pos.x < 0 || pos.y < 0 || 
-				pos.x > size.x || pos.y > size.y || 
-				inventory.has(pos)):
-				return false
+	for i in range(item_points.size()):
+		var pos := Vector2i(item_pos + item_points[i])
+		if (pos.x < 0 || pos.y < 0 || 
+			pos.x > size.x || pos.y > size.y || 
+			(inventory.has(pos) && inventory[pos] != item)):
+			return false
 	return true
 
 func place_item(item:item_base) -> bool:
-	if (contains_item(item)):
-		remove_item(item)
 	if (can_place(item) == false):
 		return false;
-	var item_size = item.size_in_inv;
+	if (contains_item(item)):
+		remove_item(item)
+	var item_points = item.points_in_inv;
 	var item_pos = relative_world_to_grid(item.global_position)
-	for x in range(item_size.x):
-		for y in range(item_size.y):
-			var pos := Vector2i(item_pos + Vector2i(x, y))
-			inventory[pos] = item
+	for i in range(item_points.size()):
+		var pos := Vector2i(item_pos + item_points[i])
+		inventory[pos] = item
 	item.position = grid_to_world(item_pos) - get_grid_world_offset()
 	item.set_inv(self, false)
 	queue_redraw()
@@ -75,7 +77,6 @@ func get_my_grid_pos() -> Vector2i:
 	return world_to_grid(global_position)
 
 func _draw() -> void:
-	draw_circle(position, 8, Color.AQUAMARINE)
 	var square_size = Vector2.ONE * GRID_SIZE;
 	for x in range(size.x):
 		for y in range(size.y):
@@ -83,9 +84,8 @@ func _draw() -> void:
 			var pos = grid_to_world(gridPos)
 			var rect = Rect2(pos, square_size)
 			if (inventory.has(gridPos)):
-				draw_rect(rect, Color.AQUA, true)
-			else:
-				draw_rect(rect, Color.AQUA, false)
+				draw_rect(rect, draw_fill_color, true)
+			draw_rect(rect, draw_color, false)
 
 #################### STATIC GRID FUNKIES ####################
 

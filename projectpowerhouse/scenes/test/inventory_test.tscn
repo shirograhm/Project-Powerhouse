@@ -22,3 +22,5 @@ position = Vector2(81, 363)
 position = Vector2(464, 264)
 
 [node name="inventory" parent="PlayerController" instance=ExtResource("1_usl3y")]
+position = Vector2(-128, -128)
+draw_color = Color(0, 0.799471, 0.799471, 0.631373)

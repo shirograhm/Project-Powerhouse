@@ -7,7 +7,7 @@
 size = Vector2(54, 20)
 
 [node name="item_demo" instance=ExtResource("1_8goex")]
-size_in_inv = Vector2i(2, 1)
+points_in_inv = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0)])
 
 [node name="Flagella" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.5, 0.5)

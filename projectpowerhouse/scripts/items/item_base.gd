@@ -1,7 +1,7 @@
 class_name item_base extends Node2D
 
 @export var item_parent:Node = null
-@export var size_in_inv := Vector2i.ONE
+@export var points_in_inv:Array[Vector2i]
 
 # TODO: ATTRIBUTES
 

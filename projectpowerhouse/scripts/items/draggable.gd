@@ -7,6 +7,7 @@ var my_inventory:inv = null
 var is_mouse_over := false
 var is_dragging := false
 var lock_position:Vector2
+var drag_offset:Vector2
 
 func _ready() -> void:
 	if (my_item == null):
@@ -22,7 +23,7 @@ func _process(delta: float) -> void:
 
 func handle_drag():
 	my_item.global_position = inv.relative_snap_to_grid(
-					get_viewport().get_mouse_position()
+					get_viewport().get_mouse_position() + drag_offset
 					)
 
 func _mouse_enter() -> void:
@@ -32,24 +33,27 @@ func _mouse_exit() -> void:
 	is_mouse_over = false;
 
 func _unhandled_input(event: InputEvent) -> void:
-	if (can_drag):
-		if (event is InputEventMouseButton and event.is_pressed()):
-			if (is_dragging):
-				get_viewport().set_input_as_handled()
-				is_dragging = false
-				if (my_inventory != null):
-					if (my_inventory.place_item(my_item)):
-						lock_position = my_item.position
-						print("Nice, i was put in inventory")
-					else:
-						print("Nope, cant be placed in inventory here")
+	if (can_drag == false):
+		return;
+	
+	if (event is InputEventMouseButton && event.is_pressed()):
+		if (is_dragging):
+			get_viewport().set_input_as_handled()
+			is_dragging = false
+			if (my_inventory != null):
+				if (my_inventory.place_item(my_item)):
+					lock_position = my_item.position
+					print("Nice, i was put in inventory")
 				else:
-					my_item.set_inv(null, true)
-					lock_position = my_item.global_position
-			elif (is_mouse_over):
-				get_viewport().set_input_as_handled()
-				is_dragging = true
-				lock_position = my_item.position
+					print("Nope, cant be placed in inventory here")
+			else:
+				my_item.set_inv(null, true)
+				lock_position = my_item.global_position
+		elif (is_mouse_over):
+			get_viewport().set_input_as_handled()
+			is_dragging = true
+			lock_position = my_item.position
+			drag_offset = get_viewport().get_mouse_position() - my_item.global_position
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is inv):
