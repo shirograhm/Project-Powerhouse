@@ -64,7 +64,9 @@ func shoot():
 			antibody_projectile.look_at(target)
 
 func die():
-	queue_free()
+	# TODO popup menu
+	get_tree().paused = true
+	print("You died")
 
 func take_damage(attacker: enemy_base, amount: float, is_crit: bool):
 	if is_iframe_active:
