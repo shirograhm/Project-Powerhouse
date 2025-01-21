@@ -10,6 +10,10 @@ var target:Vector2
 var attack_timer:float
 var iframe_timer:float
 var health:float
+var set_attack := attack_type.RANGED
+
+# Will need to change with items system
+enum attack_type {RANGED, AUTO, MELEE}
 
 # TODO need auto attack and close range attack
 
@@ -35,18 +39,25 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func shoot():
-	var projectile = Projectile.instantiate()
-	get_parent().add_child(projectile)
-	projectile.transform = global_transform
-	
-	if projectile is goldfish:
-		var goldfish_projectile = projectile as goldfish
-		goldfish_projectile.direction = global_position.direction_to(target)
-		goldfish_projectile.look_at(target)
-	elif projectile is antibody:
-		var antibody_projectile = projectile as antibody
-		antibody_projectile.direction = global_position.direction_to(target)
-		antibody_projectile.look_at(target)
+	if set_attack == attack_type.AUTO:
+		# current attack is auto NYI
+		print("auto attack")
+	if set_attack == attack_type.MELEE:
+		# current attack is melee NYI
+		print("melee attack")
+	else:
+		var projectile = Projectile.instantiate()
+		get_parent().add_child(projectile)
+		projectile.transform = global_transform
+		
+		if projectile is goldfish:
+			var goldfish_projectile = projectile as goldfish
+			goldfish_projectile.direction = global_position.direction_to(target)
+			goldfish_projectile.look_at(target)
+		elif projectile is antibody:
+			var antibody_projectile = projectile as antibody
+			antibody_projectile.direction = global_position.direction_to(target)
+			antibody_projectile.look_at(target)
 
 func die():
 	queue_free()
