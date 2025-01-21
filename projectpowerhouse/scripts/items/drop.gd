@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 
 func handle_collision(node: Node2D):
 	# TODO add item to player inventory
+	SoundManager.play_sound(SoundManager.sound_effect.ITEM_PICKUP)
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:

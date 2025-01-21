@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfgw5vlmev327"]
+[gd_scene load_steps=5 format=3 uid="uid://cfgw5vlmev327"]
 
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_2rcjh"]
 [ext_resource type="AudioStream" uid="uid://cjk4ka0tovuo1" path="res://sounds/shotgun_shoot.wav" id="1_icniu"]
 [ext_resource type="AudioStream" uid="uid://dpjpof6g4nmwa" path="res://sounds/BOOOWOOOWOOO.wav" id="1_v85ak"]
+[ext_resource type="AudioStream" uid="uid://dbmqve57objph" path="res://sounds/item_pickup.wav" id="4_nh0e6"]
 
 [node name="SoundManager" type="Node2D"]
 script = ExtResource("1_2rcjh")
@@ -14,3 +15,7 @@ volume_db = -20.0
 [node name="Booowooowooo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_v85ak")
 volume_db = -30.0
+
+[node name="ItemPickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nh0e6")
+volume_db = -5.0
