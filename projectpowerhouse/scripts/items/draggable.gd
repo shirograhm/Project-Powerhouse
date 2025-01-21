@@ -14,6 +14,13 @@ func _ready() -> void:
 		my_item = get_parent()
 	lock_position = my_item.position
 
+func rotate_item() -> void:
+	my_item.rotate(deg_to_rad(-90))
+	var rotated:Array[Vector2i] = []
+	for i in range(my_item.points_in_inv.size()):
+		rotated.append(Vector2i(my_item.points_in_inv[i].y, -my_item.points_in_inv[i].x))
+	my_item.points_in_inv = rotated
+
 func _process(delta: float) -> void:
 	if (is_dragging):
 		handle_drag();
@@ -35,6 +42,11 @@ func _mouse_exit() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if (can_drag == false):
 		return;
+	
+	if (is_dragging && event is InputEventKey && event.is_action_pressed("ui_text_indent")):
+		rotate_item()
+		get_viewport().set_input_as_handled()
+		return
 	
 	if (event is InputEventMouseButton && event.is_pressed()):
 		if (is_dragging):
