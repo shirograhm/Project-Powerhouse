@@ -98,7 +98,7 @@ func get_max_health() -> float:
 func _input(event: InputEvent) -> void:
 	if can_attack and event.is_action_pressed("shoot"):
 		target = get_global_mouse_position()
-		attack_timer.start(Global.ATTACK_DELAY)
+		attack_timer.start(1 / Global.BASE_ATTACK_SPD)
 		can_attack = false
 		shoot()
 

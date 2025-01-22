@@ -18,6 +18,7 @@ const HEAL_NUM_COLOR   = Color.LIME_GREEN
 
 # Player Constants
 const BASE_MAX_HEALTH  =  50.0
+const BASE_ATTACK_SPD  =   0.9  # attacks per second
 const BASE_CRIT_CHANCE =   0.5	# 50% base crit chance
 const BASE_CRIT_DAMAGE =   1.6	# 60% bonus damage on crits
 const BASE_MOVE_SPEED  = 200.0
