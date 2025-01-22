@@ -9,7 +9,6 @@ var is_dragging := false
 var lock_position:Vector2
 var lock_rotation:float
 var lock_points:Array[Vector2i] # HACK b/c i dont wanna do math
-var drag_offset:Vector2
 
 func _ready() -> void:
 	if (my_item == null):
@@ -32,7 +31,7 @@ func _process(delta: float) -> void:
 
 func handle_drag():
 	my_item.global_position = inv.relative_snap_to_grid(
-					get_viewport().get_mouse_position() + drag_offset
+					get_viewport().get_mouse_position()
 					)
 
 func _mouse_enter() -> void:
@@ -72,7 +71,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			lock_position = my_item.position
 			lock_rotation = my_item.rotation_degrees
 			lock_points = my_item.points_in_inv
-			drag_offset = get_viewport().get_mouse_position() - my_item.global_position
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is inv):

@@ -1,0 +1,30 @@
+[gd_scene load_steps=10 format=3 uid="uid://0t0scvr4w1gh"]
+
+[ext_resource type="Script" path="res://scripts/resource_manager.gd" id="1_6twqo"]
+[ext_resource type="Script" path="res://resources/enemies/enemy_spawn_res.gd" id="2_pq75f"]
+[ext_resource type="PackedScene" uid="uid://banm5oq63ip52" path="res://scenes/enemies/enemy_demo.tscn" id="3_5p88n"]
+[ext_resource type="PackedScene" uid="uid://dx47jyehvtyke" path="res://scenes/enemies/green_guy.tscn" id="4_xluhl"]
+[ext_resource type="Script" path="res://resources/enemies/item_drop_res.gd" id="5_h82pc"]
+[ext_resource type="PackedScene" uid="uid://2d4qw00guayj" path="res://scenes/items/golgi_apparatus.tscn" id="6_4fqxx"]
+
+[sub_resource type="Resource" id="Resource_8qy8c"]
+script = ExtResource("2_pq75f")
+wave_number = 0
+spawn_chance = 1.0
+spawn_scene = ExtResource("3_5p88n")
+
+[sub_resource type="Resource" id="Resource_le3j6"]
+script = ExtResource("2_pq75f")
+wave_number = 0
+spawn_chance = 1.0
+spawn_scene = ExtResource("4_xluhl")
+
+[sub_resource type="Resource" id="Resource_m1571"]
+script = ExtResource("5_h82pc")
+spawn_chance = 1.0
+scene = ExtResource("6_4fqxx")
+
+[node name="resource_manager" type="Node"]
+script = ExtResource("1_6twqo")
+spawnables = Array[ExtResource("2_pq75f")]([SubResource("Resource_8qy8c"), SubResource("Resource_le3j6")])
+item_drops = Array[ExtResource("5_h82pc")]([SubResource("Resource_m1571")])

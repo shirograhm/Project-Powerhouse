@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://2d4qw00guayj"]
+
+[ext_resource type="PackedScene" uid="uid://cft2axe0ftjw1" path="res://scenes/items/item_base.tscn" id="1_fyq32"]
+[ext_resource type="Texture2D" uid="uid://bdebq076ae8sm" path="res://texures/items/golgi_apparatus.png" id="2_kiscc"]
+[ext_resource type="PackedScene" uid="uid://bsk53mr3nqtpx" path="res://scenes/items/behaviors/auto_turret.tscn" id="3_gl1ms"]
+[ext_resource type="PackedScene" uid="uid://dqleoyv2bmiwy" path="res://scenes/projectiles/antibody.tscn" id="4_dubfo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_et3sx"]
+radius = 20.0
+
+[node name="golgi_apparatus" instance=ExtResource("1_fyq32")]
+points_in_inv = Array[Vector2i]([Vector2i(0, 0)])
+
+[node name="GolgiApparatus" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_kiscc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="draggable" index="0"]
+shape = SubResource("CircleShape2D_et3sx")
+
+[node name="auto_turret" parent="." index="2" instance=ExtResource("3_gl1ms")]
+projectile_scene = ExtResource("4_dubfo")

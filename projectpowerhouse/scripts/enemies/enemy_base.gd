@@ -3,7 +3,6 @@ class_name enemy_base extends Area2D
 @export var player_node:player
 
 @export var enemy_pushback_amount := 0.9
-@export var drop_id := -1
 
 # Unit Stats (TODO: Consolidate into a separate file?)
 @export var max_health   :=  1.0
@@ -24,9 +23,6 @@ signal on_death
 var collided_player:player = null;
 var velocity := Vector2.ZERO;
 var time_since_attack := 0.0;
-
-# TODO move to dedicated drop spawner (wave timer?)
-var _drop_scene := preload("res://scenes/items/drop.tscn")
 
 func _ready() -> void:
 	pass
@@ -87,11 +83,15 @@ func get_max_health() -> float:
 	return 0.0
 
 func die() -> void:
-	if drop_id >= 0:
-		var this_drop = _drop_scene.instantiate() as drop
-		this_drop.type = drop_id
-		this_drop.transform = transform
-		call_deferred("add_sibling", this_drop)
+	var weights:PackedFloat32Array
+	for i in range(ResourceManager.item_drops.size()):
+		var weight = ResourceManager.item_drops[i].spawn_chance;
+		weights.append(weight)
+	
+	var index = Global.rng.rand_weighted(weights)
+	var item = ResourceManager.item_drops[index].scene.instantiate() as item_base
+	item.transform = transform
+	call_deferred("add_sibling", item)
 	SoundManager.play_sound(SoundManager.sound_effect.BOO_WOO_WOO)
 	on_death.emit()
 	queue_free()

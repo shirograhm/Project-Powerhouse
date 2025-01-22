@@ -19,11 +19,16 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 SoundManager="*res://scenes/sound_manager.tscn"
+ResourceManager="*res://scenes/resource_manager.tscn"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[global_group]
+
+enemies="A bunch 'o enemies"
 
 [input]
 

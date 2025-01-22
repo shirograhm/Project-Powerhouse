@@ -5,6 +5,9 @@ class_name item_base extends Node2D
 
 # TODO: ATTRIBUTES
 
+signal on_added_to_inv
+signal on_removed_from_inv
+
 var my_inventory:inv = null
 
 func _ready() -> void:
@@ -21,6 +24,7 @@ func set_inv(inventory:inv, notifyInv:bool) -> void:
 		my_inventory = null
 		if (notifyInv):
 			i.remove_item(self)
+		on_removed_from_inv.emit()
 	
 	my_inventory = inventory
 	
@@ -28,6 +32,7 @@ func set_inv(inventory:inv, notifyInv:bool) -> void:
 		if (get_parent() != my_inventory):
 			get_parent().remove_child(self)
 			my_inventory.add_child(self)
+			on_added_to_inv.emit()
 	else:
 		var pos = global_position
 		get_parent().remove_child(self)

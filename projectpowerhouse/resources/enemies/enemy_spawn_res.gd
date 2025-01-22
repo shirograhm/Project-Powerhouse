@@ -1,6 +1,5 @@
-extends Resource
 
-class_name enemy_spawn_data
+class_name enemy_spawn_data extends Resource
 
 @export var wave_number: int
 @export var spawn_chance: float

@@ -3,11 +3,9 @@ extends Path2D
 @export var wave_number := 0
 @export var spawn_time := 1.0
 @export var spawn_parent: Node2D
-@export var spawnables: Array[enemy_spawn_data]
 @export var player_node: player
 
 var time_since_spawn := 0.0
-
 
 var total_size:float;
 
@@ -38,15 +36,15 @@ func _physics_process(delta: float) -> void:
 
 func spawn():
 	var weights:PackedFloat32Array
-	for i in range(spawnables.size()):
+	for i in range(ResourceManager.spawnables.size()):
 		var weight = 0;
-		if (spawnables[i].wave_number <= wave_number):
-			weight = spawnables[i].spawn_chance;
+		if (ResourceManager.spawnables[i].wave_number <= wave_number):
+			weight = ResourceManager.spawnables[i].spawn_chance;
 		weights.append(weight)
 	
 	var index = Global.rng.rand_weighted(weights)
 	
-	var instance = spawnables[index].spawn_scene.instantiate() as enemy_base;
+	var instance = ResourceManager.spawnables[index].spawn_scene.instantiate() as enemy_base;
 	var ratio = randf() * total_size
 	var length := 0.0;
 	var prev := curve.get_point_position(0)
