@@ -25,6 +25,10 @@ const BASE_MOVE_SPEED  = 200.0
 const ATTACK_DELAY = 0.8
 const IFRAME_DELAY = 0.2
 
+# Wave Constants
+const WAVE_TIME = 15.0
+const WAVE_BREAK_TIME = 5.0
+
 func _ready() -> void:
 	pass
 

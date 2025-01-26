@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_drvb0"]
 [ext_resource type="Texture2D" uid="uid://bnaxccbfj8ein" path="res://texures/Virus.png" id="2_7b3vt"]
 [ext_resource type="PackedScene" uid="uid://bmdt3aeem0yvb" path="res://scenes/player.tscn" id="3_mvtyn"]
-[ext_resource type="PackedScene" uid="uid://doxqyhir31uae" path="res://scenes/inventory.tscn" id="4_6pasn"]
-[ext_resource type="PackedScene" uid="uid://sovlqsvea7pm" path="res://scenes/enemies/spawner.tscn" id="5_qpqp8"]
+[ext_resource type="PackedScene" path="res://scenes/inventory.tscn" id="4_6pasn"]
+[ext_resource type="PackedScene" uid="uid://cihtavcsuvfs4" path="res://scenes/enemies/spawner.tscn" id="5_qpqp8"]
 [ext_resource type="PackedScene" uid="uid://d4co5sbcgnc11" path="res://scenes/hud.tscn" id="6_3ns4i"]
 
 [sub_resource type="Curve2D" id="Curve2D_ir7ye"]

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://sovlqsvea7pm"]
+[gd_scene load_steps=2 format=3 uid="uid://cihtavcsuvfs4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/spawner.gd" id="1_a3opm"]
 
 [node name="Spawner" type="Path2D"]
 script = ExtResource("1_a3opm")
+
+[node name="WaveTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
