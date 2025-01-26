@@ -1,4 +1,4 @@
-extends Path2D
+class_name spawner extends Path2D
 
 @onready var wave_timer := $WaveTimer
 
@@ -88,6 +88,12 @@ func spawn():
 func increment_wave():
 	wave_number += 1
 	print("Starting wave #" + str(wave_number))
+
+func get_wave_hud_values():
+	if set_wave_state == wave_state.WAVE:
+		return Vector3(wave_number, Global.WAVE_TIME, wave_timer.time_left)
+	else:
+		return Vector3(wave_number, Global.WAVE_BREAK_TIME, wave_timer.time_left)
 
 func _on_wave_timer_timeout() -> void:
 	if set_wave_state == wave_state.WAVE:

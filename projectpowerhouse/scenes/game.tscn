@@ -37,5 +37,6 @@ player_node = NodePath("../Player")
 
 [node name="Hud" parent="." instance=ExtResource("6_3ns4i")]
 player_path = NodePath("../Player")
+spawner_path = NodePath("../Spawner")
 
 [node name="EnemyHolder" type="Node2D" parent="."]
