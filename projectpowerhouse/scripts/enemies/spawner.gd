@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 
 func spawn_waves():
 	if set_wave_state == wave_state.WAVE:
+		enemies_deleted = false
 		if (time_since_spawn >= spawn_time):
 			time_since_spawn = 0;
 			spawn();
@@ -54,7 +55,6 @@ func spawn_waves():
 			enemies_deleted = true
 
 func spawn():
-		
 	var weights:PackedFloat32Array
 	for i in range(ResourceManager.spawnables.size()):
 		var weight = 0;
