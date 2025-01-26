@@ -29,6 +29,10 @@ const IFRAME_DELAY = 0.2
 const WAVE_TIME = 15.0
 const WAVE_BREAK_TIME = 5.0
 
+# Groups
+const GROUP_ENEMIES = "enemies"
+const GROUP_ITEMS = "items"
+
 func _ready() -> void:
 	pass
 

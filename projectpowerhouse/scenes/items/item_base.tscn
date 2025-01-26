@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/items/item_base.gd" id="1_susph"]
 [ext_resource type="PackedScene" uid="uid://bvgv33tsm6qtw" path="res://scenes/items/draggable.tscn" id="2_o2m52"]
 
-[node name="item_base" type="Node2D"]
+[node name="item_base" type="Node2D" groups=["items"]]
 script = ExtResource("1_susph")
 
 [node name="draggable" parent="." instance=ExtResource("2_o2m52")]

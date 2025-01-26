@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://doxqyhir31uae"]
+[gd_scene load_steps=2 format=3 uid="uid://bw7bk0xa5661v"]
 
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="1_uath7"]
 
@@ -11,4 +11,4 @@ collision_layer = 8
 collision_mask = 8
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="InventoryCollisionShape2D" type="CollisionShape2D" parent="Area2D"]

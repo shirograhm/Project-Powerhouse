@@ -10,6 +10,7 @@ class_name spawner extends Path2D
 
 var time_since_spawn := 0.0
 var set_wave_state := wave_state.WAVE
+var enemies_deleted := false
 
 enum wave_state {WAVE, BREAK}
 
@@ -42,22 +43,17 @@ func _physics_process(delta: float) -> void:
 
 func spawn_waves():
 	if set_wave_state == wave_state.WAVE:
-		
 		if (time_since_spawn >= spawn_time):
-			print("in wave case. time to spawn")
 			time_since_spawn = 0;
 			spawn();
 	else:
-		
-		if spawn_parent:
-			print("in wave break case. deleting spawn parent")
-			spawn_parent.queue_free()
-			spawn_parent = null
+		if !enemies_deleted:
+			for node in spawn_parent.get_children():
+				if node.is_in_group(Global.GROUP_ENEMIES):
+					node.queue_free()
+			enemies_deleted = true
 
 func spawn():
-	if !spawn_parent:
-		spawn_parent = Node2D.new()
-		add_sibling(spawn_parent)
 		
 	var weights:PackedFloat32Array
 	for i in range(ResourceManager.spawnables.size()):
@@ -99,10 +95,12 @@ func _on_wave_timer_timeout() -> void:
 	if set_wave_state == wave_state.WAVE:
 		set_wave_state = wave_state.BREAK
 		wave_timer.start(Global.WAVE_BREAK_TIME)
+		player_node.show_inventory()
 		print("Start wave break after wave #" + str(wave_number))
 	else:
 		set_wave_state = wave_state.WAVE
 		increment_wave()
+		player_node.hide_inventory()
 		wave_timer.start(Global.WAVE_TIME)
 		
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmdt3aeem0yvb"]
+[gd_scene load_steps=6 format=3 uid="uid://bmdt3aeem0yvb"]
 
 [ext_resource type="Texture2D" uid="uid://b54g18nbd0roi" path="res://texures/player.png" id="1_p076o"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rktpd"]
 [ext_resource type="PackedScene" uid="uid://dqleoyv2bmiwy" path="res://scenes/projectiles/antibody.tscn" id="2_uyq6j"]
+[ext_resource type="PackedScene" uid="uid://bw7bk0xa5661v" path="res://scenes/inventory.tscn" id="4_dmllu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qa2pt"]
 
@@ -19,12 +20,14 @@ shape = SubResource("CapsuleShape2D_qa2pt")
 texture = ExtResource("1_p076o")
 hframes = 3
 
-[node name="Player" type="Node2D" parent="."]
-texture_filter = 1
-
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="IFrameTimer" type="Timer" parent="."]
+
+[node name="inventory" parent="." instance=ExtResource("4_dmllu")]
+visible = false
+position = Vector2(-64, -64)
+size = Vector2i(4, 4)
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="IFrameTimer" to="." method="_on_i_frame_timer_timeout"]

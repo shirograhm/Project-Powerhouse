@@ -30,6 +30,7 @@ window/stretch/mode="viewport"
 [global_group]
 
 enemies="A bunch 'o enemies"
+items="A lot o items"
 
 [input]
 

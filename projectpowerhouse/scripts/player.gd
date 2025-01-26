@@ -4,6 +4,7 @@ class_name player extends CharacterBody2D
 
 @onready var iframe_timer := $IFrameTimer
 @onready var attack_timer := $AttackTimer
+@onready var inventory := $inventory
 
 var is_iframe_active = false
 var can_attack = true
@@ -82,6 +83,12 @@ func take_damage(attacker: enemy_base, amount: float, is_crit: bool):
 		health -= post_mitigated
 		if (health <= 0):
 			die()
+
+func show_inventory():
+	inventory.visible = true
+	
+func hide_inventory():
+	inventory.visible = false
 
 func roll_crit() -> bool:
 	return crit_chance > Global.rng.randf()

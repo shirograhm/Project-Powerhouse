@@ -2,6 +2,9 @@ class_name inv extends Node2D
 
 const GRID_SIZE := 32
 
+# Note: renames to InventroyCollisionShape2D since player already has CollisionShape2D
+@onready var collision_shape = $Area2D/InventoryCollisionShape2D
+
 @export var size := Vector2i.ONE
 @export var draw_color := Color.CYAN
 @export var draw_fill_color := Color(.1, .1, .8, .2)
@@ -15,7 +18,6 @@ func _ready() -> void:
 	_instance = self;
 	var area = $Area2D
 	area.position += size * GRID_SIZE * .5
-	var collision_shape = $Area2D/CollisionShape2D
 	var shape := RectangleShape2D.new()
 	shape.size = size * GRID_SIZE
 	collision_shape.shape = shape
